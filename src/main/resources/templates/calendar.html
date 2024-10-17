@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css">
+</head>
+<body layout:decorate="layout :: content">
+<!-- Calendar Header -->
+<div class="calendar-header">
+    <h2>Calendar</h2>
+    <button class="btn btn-primary" id="addEventBtn">+ Add New Event</button>
+</div>
+
+<!-- Sidebar Events List -->
+<div class="sidebar-events">
+    <h3>You are going to</h3>
+    <ul id="eventList">
+        <li>
+            <span>Design Conference</span>
+            <p>Today 07:19 AM</p>
+        </li>
+        <li>
+            <span>Weekend Festival</span>
+            <p>16 October 2019</p>
+        </li>
+    </ul>
+    <button class="btn btn-secondary">See More</button>
+</div>
+
+<!-- Calendar View -->
+<div id="calendar"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: [
+                {
+                    title: 'Design Conference',
+                    start: '2019-10-03',
+                    end: '2019-10-05'
+                },
+                {
+                    title: 'Weekend Festival',
+                    start: '2019-10-16'
+                },
+            ]
+        });
+        calendar.render();
+    });
+</script>
+</body>
+</html>

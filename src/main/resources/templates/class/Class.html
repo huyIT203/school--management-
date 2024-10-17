@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Class Management</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Class Management</h2>
+
+    <div class="button-group">
+        <button onclick="showForm('add')">Thêm Thiếu Nhi</button>
+        <button onclick="showForm('edit')">Sửa Thiếu Nhi</button>
+        <button onclick="showForm('delete')">Xóa Thiếu Nhi</button>
+    </div>
+
+    <div class="table-title">
+        <h1>Danh Sách Thiếu Nhi</h1>
+    </div>
+
+    <div class="table-filters">
+        <div class="filter-group">
+            <i class="fas fa-filter"></i>
+            <input type="date">
+        </div>
+        <div class="filter-group">
+            <select>
+                <option>Order Type</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <select>
+                <option>Order Status</option>
+            </select>
+        </div>
+        <button onclick="resetFilters()">Reset Filter</button>
+    </div>
+
+    <table id="children-list">
+        <thead>
+        <tr>
+            <th>Tên Thánh - Họ và Tên</th>
+            <th>SDT</th>
+            <th>Attendance</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="student-table-body">
+        <tr th:each="student : ${students}">
+            <td><img th:src="${student.profilePictureUrl}" alt="Profile Picture" class="profile-img">
+                <span th:text="${student.christianName} + ' ' + ${student.fullName}"></span>
+            </td>
+            <td th:text="${student.phoneNumber}"></td>
+            <td>
+                <div>
+                    <span class="badge attended">Attended</span>
+                </div>
+            </td>
+            <td><a href="#" class="details-button">View Details</a></td>
+            <td>
+                <button onclick="editStudent(${student.id})">Edit</button>
+                <button onclick="deleteStudent(${student.id})">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function showForm(action) {
+        // Hiển thị form tùy thuộc vào hành động (add, edit, delete)
+        let url = '';
+        if (action === 'add') {
+            url = '/class/form-add';
+        } else if (action === 'edit') {
+            url = '/class/form-edit';
+        } else if (action === 'delete') {
+            url = '/class/form-delete';
+        }
+        window.location.href = url; // Chuyển đến URL của form tương ứng
+    }
+
+    function editStudent(studentId) {
+        showForm('edit');
+    }
+
+    function deleteStudent(studentId) {
+        showForm('delete');
+    }
+</script>
+</body>
+</html>

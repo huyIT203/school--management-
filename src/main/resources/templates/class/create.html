@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Thêm Thiếu Nhi</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Thêm Thiếu Nhi</h2>
+
+    <form id="studentForm" th:action="@{/api/students}" th:object="${student}" method="post">
+        <div>
+            <label for="christianName">Tên Thánh:</label>
+            <input type="text" id="christianName" th:field="*{christianName}" required/>
+        </div>
+        <div>
+            <label for="fullName">Họ và Tên:</label>
+            <input type="text" id="fullName" th:field="*{fullName}" required/>
+        </div>
+        <div>
+            <label for="dob">Ngày Sinh:</label>
+            <input type="date" id="dob" th:field="*{dob}" required/>
+        </div>
+        <div>
+            <label for="phoneNumber">Số Điện Thoại:</label>
+            <input type="text" id="phoneNumber" th:field="*{phoneNumber}" required/>
+        </div>
+        <div>
+            <button type="submit">Save</button>
+            <a href="/class">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

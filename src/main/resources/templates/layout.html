@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>DashStack</h2>
+        </div>
+        <div class="menu-section">
+            <ul class="menu">
+                <li><a th:href="@{/dashboard}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a th:href="@{/class}"><i class="fas fa-chalkboard-teacher"></i> Class</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Submit Request</a></li>
+                <li><a href="#"><i class="fas fa-book"></i> Lecture</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+            </ul>
+        </div>
+        <div class="menu-section">
+            <ul class="menu">
+                <li class="menu-header">Advanced Permission</li>
+                <li><a href="#"><i class="fas fa-check-circle"></i> Review</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Summary</a></li>
+                <li><a href="#"><i class="fas fa-phone"></i> Contact</a></li>
+                <li><a href="#"><i class="fas fa-shopping-cart"></i> Shop</a></li>
+                <li><a href="#"><i class="fas fa-table"></i> Table</a></li>
+            </ul>
+        </div>
+        <div class="menu-section">
+            <ul class="menu">
+                <li class="menu-header">Settings</li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <header class="header">
+            <div class="header-search">
+                <input type="text" placeholder="Search for something...">
+            </div>
+            <div class="header-setting">
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+            </div>
+            <div class="header-profile">
+                <img src="/images/profile.jpg" alt="Profile Picture">
+            </div>
+        </header>
+
+        <!-- Nội dung sẽ được chèn vào đây -->
+        <div layout:fragment="content">
+    </div>
+</div>
+<script src="/js/script.js"></script>
+</body>
+</html>

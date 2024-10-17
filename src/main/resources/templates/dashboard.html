@@ -1,0 +1,120 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Dashboard</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="stat-title">
+        <h2>DashBoard</h2>
+    </div>
+
+    <div class="dashboard-stats">
+        <div class="stat">
+            <div class="stat-content">
+                <h3>Class</h3>
+                <h1>Thêm Sức 2C</h1>
+                <p><i class="fas fa-arrow-up"></i> <span class="badge attended">8.5% Up from yesterday</span></p>
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-content">
+                <h3>Grade</h3>
+                <h1>Thêm Sức 2</h1>
+                <p><i class="fas fa-arrow-up"></i> <span class="badge delivered">1.3% Up from past week</span></p>
+            </div>
+        </div>
+        <div class="stat">
+            <div class="stat-content">
+                <h3>Ngành</h3>
+                <h1>Thiếu</h1>
+                <p><i class="fas fa-arrow-down"></i> <span class="badge leave">4.3% Down from yesterday</span></p>
+            </div>
+        </div>
+        <div class="stat">
+            <div class="stat-content">
+                <h3>Đoàn</h3>
+                <h1>HTT</h1>
+                <p><i class="fas fa-arrow-up"></i> <span class="badge attended">1.8% Up from yesterday</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-title">
+        <h1>Danh Sách Thiếu Nhi</h1>
+    </div>
+
+    <div class="table-filters">
+        <div class="filter-group">
+            <i class="fas fa-filter"></i>
+            <input type="date">
+        </div>
+        <div class="filter-group">
+            <select>
+                <option>Order Type</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <select>
+                <option>Order Status</option>
+            </select>
+        </div>
+        <button onclick="resetFilters()">Reset Filter</button>
+    </div>
+
+    <table id="children-list">
+        <thead>
+        <tr>
+            <th>Tên Thánh - Họ và Tên</th>
+            <th>SDT</th>
+            <th>Attendance</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody id="student-table-body">
+        <!-- Các dòng dữ liệu sẽ được thêm vào đây thông qua JavaScript -->
+        </tbody>
+    </table>
+</div>
+</div>
+
+<script>
+    // Fetch dữ liệu từ API và hiển thị trên bảng
+    fetch('/api/students')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('student-table-body');
+            tableBody.innerHTML = ''; // Xóa nội dung cũ trước khi thêm mới
+
+            data.forEach(student => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td><img src="${student.profilePicture}" alt="Profile Picture" class="profile-img"> ${student.christianName} ${student.fullName}</td>
+                    <td>${student.phoneNumber}</td>
+                    <td>
+                        <div>
+                            <span class="badge attended">${student.attendanceStatus1}</span>
+                            <span class="badge delivered">${student.attendanceStatus2}</span>
+                        </div>
+                    </td>
+                    <td><a href="#" class="details-button">View Details</a></td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching student data:', error));
+
+    function resetFilters() {
+        // Chức năng để reset bộ lọc
+        console.log('Resetting filters');
+    }
+</script>
+    </div>
+</div>
+</body>
+</html>
